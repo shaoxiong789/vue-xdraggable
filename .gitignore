@@ -27,7 +27,7 @@ coverage
 build/Release
 
 # Project build folder
-dist
+# dist
 
 # Dependency directories
 node_modules
