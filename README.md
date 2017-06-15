@@ -1,19 +1,23 @@
-# vue-drag [![NPM version][npm-image]][npm-url] 
+# vue-draggable [![NPM version][npm-image]][npm-url] 
 
 > 
 
 ## Installation
 
 ```sh
-$ npm install --save vue-drag
+$ npm install --save vue-draggable
 ```
 
 ## Usage
-
+* 支持模块化加载和浏览器中直接引入使用
 ```js
-import vue-drag from 'vue-drag';
-
-vue-drag(params);
+import draggable from 'vue-draggable/src/draggable.vue';
+// OR
+import draggable from 'vue-draggable';
+Vue.use(draggable)
+// OR
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script type="text/javascript" src="js/vue-draggable.js" ></script>
 ```
 
 ## License

@@ -96,6 +96,7 @@ export default {
         mousemove.subscribe(new Observer((e)=>{
             e.preventDefault();
             if(this.status.dragging==true){
+                this.$emit('dragging',e);
                 if(this.move == 'x' || this.move == 'both'){
                     var left = (e.clientX-this.pos.x)>0?(e.clientX-this.pos.x):0;
                     if(left>(this.desk.width-this.animal.width)){
@@ -112,7 +113,10 @@ export default {
                 }
             }
         }));
-        mouseup.subscribe(new Observer(()=>{
+        mouseup.subscribe(new Observer((e)=>{
+            if(this.status.dragging==true){
+                this.$emit('dragend',e);
+            }
             this.status.dragging = false;
         }));
     }

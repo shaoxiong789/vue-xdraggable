@@ -65,14 +65,14 @@ export default {
         };
     },
     methods: {
-        dragstart() {
-
+        dragstart(e) {
+            window.console.log('开始拖动',e);
         },
-        dragging() {
-            
+        dragging(e) {
+            window.console.log('拖动中',e);
         },
-        dragend() {
-            
+        dragend(e) {
+            window.console.log('拖动结束',e);
         },
         focusing(num) {
             this.focus = num;
