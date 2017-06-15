@@ -21,7 +21,7 @@ Vue.use(draggable)
 ```
 
 ## Code Demo
-```javascript
+```vue
 <template>
     <div>
         <p>只能水平拖动</p>
