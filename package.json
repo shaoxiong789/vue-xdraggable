@@ -6,11 +6,8 @@
   "description": "",
   "author": {
     "name": "丁少雄",
-    "email": "380449900@qq.com",
+    "email": "sx380449900@gmail.com",
     "url": "https://github.com/shaoxiong789"
-  },
-  "_scripts": {
-    "prebuild": "npm-run-all lint flow test"
   },
   "scripts": {
     "test": "mocha --compilers js:babel-core/register src/**/*.spec.js",
@@ -65,5 +62,9 @@
   },
   "dependencies": {
     "vue": "^2.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dingshaoxiong/vue-xdraggable.git"
   }
 }
