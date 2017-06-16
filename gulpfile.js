@@ -21,7 +21,7 @@ gulp.task('build:dev', ['lint'], () => {
     return rollup({
         entry: 'src/index.js',
         plugins: [vue(), babel()],
-        external: ['lazy-load-img']
+        external: ['vue-draggable']
     })
     .then((bundle) => {
         bundle.write({
@@ -41,7 +41,7 @@ gulp.task('build:prod', ['lint'], () => {
     return rollup({
         entry: 'src/index.js',
         plugins: [vue(), babel(), uglify()],
-        external: ['lazy-load-img']
+        external: ['vue-draggable']
     })
     .then((bundle) => {
         bundle.write({
