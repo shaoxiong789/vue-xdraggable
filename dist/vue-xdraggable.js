@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global.VueDraggable = factory());
+	(global.VueXdraggable = factory());
 }(this, (function () { 'use strict';
 
 var Observer = function Observer(consumer) {
@@ -41,7 +41,7 @@ var mousemove = new Observable(function () {
         observers.push(observer);
     };
 }());
-var Draggable = {
+var Xdraggable = {
     render: function render() {
         var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', [_vm._t("default")], 2);
     },
@@ -146,7 +146,7 @@ var state = false;
 var install$1 = function (Vue) {
     if (state) return;
     state = true;
-    Vue.component('draggable', Draggable);
+    Vue.component('xdraggable', Xdraggable);
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
@@ -156,4 +156,4 @@ if (typeof window !== 'undefined' && window.Vue) {
 return install$1;
 
 })));
-//# sourceMappingURL=vue-draggable.js.map
+//# sourceMappingURL=vue-xdraggable.js.map

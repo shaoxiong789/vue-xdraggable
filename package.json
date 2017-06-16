@@ -1,7 +1,7 @@
 {
-  "name": "vue-drag",
-  "main": "dist/vue-draggable.js",
-  "module": "dist/vue-drag.es.js",
+  "name": "vue-xdraggable",
+  "main": "dist/vue-xdraggable.js",
+  "module": "dist/vue-xdraggable.js",
   "version": "0.0.0",
   "description": "",
   "author": {

@@ -54,7 +54,7 @@
     </div>
 </template>
 <script>
-import Draggable from '../../src/draggable.vue';
+import Draggable from '../../src/xdraggable.vue';
 export default {
     components: {
         Draggable

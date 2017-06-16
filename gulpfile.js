@@ -6,8 +6,8 @@ const vue = require('rollup-plugin-vue2');
 const babel = require('rollup-plugin-babel');
 const uglify = require('rollup-plugin-uglify');
 
-const moduleName = 'VueDraggable';
-const destName = 'vue-draggable';
+const moduleName = 'VueXdraggable';
+const destName = 'vue-xdraggable';
 // 检测代码风格
 gulp.task('lint', () => {
     clear();
@@ -21,7 +21,7 @@ gulp.task('build:dev', ['lint'], () => {
     return rollup({
         entry: 'src/index.js',
         plugins: [vue(), babel()],
-        external: ['lazy-load-img']
+        external: ['vue-xdraggable']
     })
     .then((bundle) => {
         bundle.write({
@@ -30,7 +30,7 @@ gulp.task('build:dev', ['lint'], () => {
             dest: `dist/${destName}.js`,
             sourceMap: true,
             globals: {
-                'vue-draggable': 'VueDraggable'
+                'vue-xdraggable': 'VueXdraggable'
             }
         });
     });
@@ -41,7 +41,7 @@ gulp.task('build:prod', ['lint'], () => {
     return rollup({
         entry: 'src/index.js',
         plugins: [vue(), babel(), uglify()],
-        external: ['lazy-load-img']
+        external: ['vue-xdraggable']
     })
     .then((bundle) => {
         bundle.write({
@@ -50,7 +50,7 @@ gulp.task('build:prod', ['lint'], () => {
             dest: `dist/${destName}.min.js`,
             sourceMap: true,
             globals: {
-                'vue-draggable': 'VueDraggable'
+                'vue-xdraggable': 'VueXdraggable'
             }
         });
     });
