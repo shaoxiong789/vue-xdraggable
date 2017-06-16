@@ -2,7 +2,7 @@
   "name": "vue-xdraggable",
   "main": "dist/vue-xdraggable.js",
   "module": "dist/vue-xdraggable.js",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "author": {
     "name": "丁少雄",
