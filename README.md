@@ -20,6 +20,9 @@ Vue.use(xdraggable)
 <script type="text/javascript" src="js/vue-xdraggable.js" ></script>
 ```
 
+## Example
+[Demo Page](https://shaoxiong789.github.io/vue-xdraggable/demo/dist/)
+
 ## Code Demo
 ```vue
 <template>
