@@ -4,31 +4,6 @@
     </div>
 </template>
 <script>
-import Observer from './util/Observer.js';
-import Observable from './util/Observable.js';
-//利用观察者模式和闭包的特性使事件只绑定一次，从而优化性能
-var mouseup = new Observable((function(){
-    var observers = [] ;
-    document.addEventListener('mouseup',(e)=>{
-        observers.forEach((observer)=>{
-            observer.onNotify(e);
-        });
-    });
-    return function(observer){
-        observers.push(observer);
-    };
-})());
-var mousemove = new Observable((function(){
-    var observers = [] ;
-    document.addEventListener('mousemove',(e)=>{
-        observers.forEach((observer)=>{
-            observer.onNotify(e);
-        });
-    });
-    return function(observer){
-        observers.push(observer);
-    };
-})());
 export default {
     props: {
         move: {
@@ -93,7 +68,11 @@ export default {
             this.pos.x = e.clientX - this.left;
             this.pos.y = e.clientY - this.top;
         });
-        mousemove.subscribe(new Observer((e)=>{
+        document.addEventListener('mousemove',this.mousemoveObserver);
+        document.addEventListener('mouseup',this.mouseupObserver);
+    },
+    methods: {
+        mousemoveObserver(e) {
             e.preventDefault();
             if(this.status.dragging==true){
                 this.$emit('dragging',e);
@@ -112,13 +91,17 @@ export default {
                     this.top = top;
                 }
             }
-        }));
-        mouseup.subscribe(new Observer((e)=>{
+        },
+        mouseupObserver(e) {
             if(this.status.dragging==true){
                 this.$emit('dragend',e);
             }
             this.status.dragging = false;
-        }));
+        }
+    },
+    beforeDestroy() {
+        document.removeEventListener('mousemove',this.mousemoveObserver);
+        document.removeEventListener('mouseup',this.mouseupObserver);
     }
 };
 </script>

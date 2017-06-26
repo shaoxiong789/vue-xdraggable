@@ -4,43 +4,6 @@
 	(global.VueXdraggable = factory());
 }(this, (function () { 'use strict';
 
-var Observer = function Observer(consumer) {
-    this._consumer = consumer;
-};
-Observer.prototype.onNotify = function (data) {
-    this._consumer.call(this, data);
-};
-
-var Observable = function Observable(generator) {
-    this._generator = generator;
-};
-Observable.prototype.subscribe = function (observer) {
-    this._generator.call(this, observer);
-};
-
-//利用观察者模式和闭包的特性使事件只绑定一次，从而优化性能
-var mouseup = new Observable(function () {
-    var observers = [];
-    document.addEventListener('mouseup', function (e) {
-        observers.forEach(function (observer) {
-            observer.onNotify(e);
-        });
-    });
-    return function (observer) {
-        observers.push(observer);
-    };
-}());
-var mousemove = new Observable(function () {
-    var observers = [];
-    document.addEventListener('mousemove', function (e) {
-        observers.forEach(function (observer) {
-            observer.onNotify(e);
-        });
-    });
-    return function (observer) {
-        observers.push(observer);
-    };
-}());
 var Xdraggable = {
     render: function render() {
         var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', [_vm._t("default")], 2);
@@ -112,32 +75,41 @@ var Xdraggable = {
             _this.pos.x = e.clientX - _this.left;
             _this.pos.y = e.clientY - _this.top;
         });
-        mousemove.subscribe(new Observer(function (e) {
+        document.addEventListener('mousemove', this.mousemoveObserver);
+        document.addEventListener('mouseup', this.mouseupObserver);
+    },
+
+    methods: {
+        mousemoveObserver: function mousemoveObserver(e) {
             e.preventDefault();
-            if (_this.status.dragging == true) {
-                _this.$emit('dragging', e);
-                if (_this.move == 'x' || _this.move == 'both') {
-                    var left = e.clientX - _this.pos.x > 0 ? e.clientX - _this.pos.x : 0;
-                    if (left > _this.desk.width - _this.animal.width) {
-                        left = _this.desk.width - _this.animal.width;
+            if (this.status.dragging == true) {
+                this.$emit('dragging', e);
+                if (this.move == 'x' || this.move == 'both') {
+                    var left = e.clientX - this.pos.x > 0 ? e.clientX - this.pos.x : 0;
+                    if (left > this.desk.width - this.animal.width) {
+                        left = this.desk.width - this.animal.width;
                     }
-                    _this.left = left;
+                    this.left = left;
                 }
-                if (_this.move == 'y' || _this.move == 'both') {
-                    var top = e.clientY - _this.pos.y > 0 ? e.clientY - _this.pos.y : 0;
-                    if (top > _this.desk.height - _this.animal.height) {
-                        top = _this.desk.height - _this.animal.height;
+                if (this.move == 'y' || this.move == 'both') {
+                    var top = e.clientY - this.pos.y > 0 ? e.clientY - this.pos.y : 0;
+                    if (top > this.desk.height - this.animal.height) {
+                        top = this.desk.height - this.animal.height;
                     }
-                    _this.top = top;
+                    this.top = top;
                 }
             }
-        }));
-        mouseup.subscribe(new Observer(function (e) {
-            if (_this.status.dragging == true) {
-                _this.$emit('dragend', e);
+        },
+        mouseupObserver: function mouseupObserver(e) {
+            if (this.status.dragging == true) {
+                this.$emit('dragend', e);
             }
-            _this.status.dragging = false;
-        }));
+            this.status.dragging = false;
+        }
+    },
+    beforeDestroy: function beforeDestroy() {
+        document.removeEventListener('mousemove', this.mousemoveObserver);
+        document.removeEventListener('mouseup', this.mouseupObserver);
     }
 };
 
